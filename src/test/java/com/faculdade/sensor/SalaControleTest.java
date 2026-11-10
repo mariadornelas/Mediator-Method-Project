@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** O mediador de verdade: as regras que ligam os componentes. */
 class SalaControleTest {
 
     private Ventilador ventilador;
@@ -30,8 +29,6 @@ class SalaControleTest {
         sala.conectar(temperatura);
         sala.conectar(pressao);
     }
-
-    // ---- regras por evento ----
 
     @Test
     void leiturasNormaisNaoDevemAcionarNada() {
@@ -94,14 +91,12 @@ class SalaControleTest {
         assertFalse(alarme.isDisparado());
     }
 
-    // ---- regras que dependem de VÁRIOS componentes (o motivo de existir do mediador) ----
-
     @Test
     void ventiladorDevePermanecerLigadoEnquantoAPressaoEstiverCritica() {
         temperatura.ler(95);
         pressao.ler(11);
 
-        temperatura.ler(70);   // temperatura normaliza, mas a pressão segue crítica
+        temperatura.ler(70);
 
         assertTrue(ventilador.isLigado());
         assertTrue(alarme.isDisparado());
@@ -113,14 +108,12 @@ class SalaControleTest {
         temperatura.ler(85);
         pressao.ler(9);
 
-        pressao.ler(5);   // pressão normaliza, temperatura segue em alerta
+        pressao.ler(5);
 
         assertTrue(alarme.isDisparado());
         assertTrue(ventilador.isLigado());
         assertFalse(valvula.isAberta());
     }
-
-    // ---- silenciamento pelo operador ----
 
     @Test
     void operadorDevePoderSilenciarAlarmeEmAlertaSemDesligarOVentilador() {
@@ -158,10 +151,10 @@ class SalaControleTest {
         painel.solicitarSilenciamento();
         assertFalse(alarme.isDisparado());
 
-        temperatura.ler(95);   // piora: alarme volta a soar
+        temperatura.ler(95);
         assertTrue(alarme.isDisparado());
 
-        temperatura.ler(85);   // melhora para alerta: o silenciamento antigo não vale mais
+        temperatura.ler(85);
         assertTrue(alarme.isDisparado());
     }
 
@@ -169,10 +162,10 @@ class SalaControleTest {
     void silenciamentoDeveSerDesfeitoQuandoTudoNormalizar() {
         temperatura.ler(85);
         painel.solicitarSilenciamento();
-        temperatura.ler(70);   // normaliza
+        temperatura.ler(70);
         assertFalse(alarme.isDisparado());
 
-        temperatura.ler(85);   // novo alerta: o alarme volta a soar
+        temperatura.ler(85);
 
         assertTrue(alarme.isDisparado());
     }
@@ -182,17 +175,15 @@ class SalaControleTest {
         temperatura.ler(85);
         painel.solicitarSilenciamento();
 
-        pressao.ler(9);   // outra grandeza também em alerta; o pior nível continua ALERTA
+        pressao.ler(9);
 
         assertFalse(alarme.isDisparado());
     }
 
-    // ---- registro e estado ----
-
     @Test
     void painelDeveRegistrarUmaMensagemPorEventoNaOrdem() {
         temperatura.ler(85);
-        temperatura.ler(86);   // sem mudança de nível: nenhuma mensagem nova
+        temperatura.ler(86);
         pressao.ler(11);
 
         assertEquals(List.of("T-01: temperatura em alerta", "P-01: pressão crítica"), painel.getMensagens());
@@ -206,8 +197,6 @@ class SalaControleTest {
         assertEquals(Nivel.ALERTA, sala.getNivelTemperatura());
         assertEquals(Nivel.CRITICO, sala.getNivelPressao());
     }
-
-    // ---- validações ----
 
     @Test
     void construtorDeveRejeitarComponentesNulos() {
@@ -235,7 +224,7 @@ class SalaControleTest {
         temperatura2.ler(95);
 
         assertTrue(ventilador2.isLigado());
-        assertFalse(ventilador.isLigado());   // a primeira sala não foi afetada
+        assertFalse(ventilador.isLigado());
         assertEquals(Nivel.NORMAL, sala.getNivelTemperatura());
     }
 }

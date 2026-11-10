@@ -1,6 +1,5 @@
 package com.faculdade.sensor;
 
-/** Colega (atuador): sirene da sala. */
 public class Alarme extends Componente {
 
     private boolean disparado;

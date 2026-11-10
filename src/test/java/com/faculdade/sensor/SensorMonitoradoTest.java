@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Os sensores isolados, com um mediador espião (lambda): só informam fatos, e só quando o nível muda. */
 class SensorMonitoradoTest {
 
     private final List<Evento> eventos = new ArrayList<>();
@@ -40,8 +39,8 @@ class SensorMonitoradoTest {
         SensorTemperatura s = temperatura();
 
         s.ler(85);
-        s.ler(86);   // continua em alerta
-        s.ler(89);   // continua em alerta
+        s.ler(86);
+        s.ler(89);
 
         assertEquals(List.of(Evento.TEMPERATURA_ALTA), eventos);
     }
@@ -105,7 +104,7 @@ class SensorMonitoradoTest {
 
         assertThrows(IllegalStateException.class, () -> s.ler(95));
 
-        assertEquals(Nivel.NORMAL, s.getNivel());   // pode tentar de novo depois de conectar
+        assertEquals(Nivel.NORMAL, s.getNivel());
     }
 
     @Test

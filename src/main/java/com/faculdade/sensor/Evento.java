@@ -1,6 +1,5 @@
 package com.faculdade.sensor;
 
-/** O que um componente comunica ao mediador. O componente informa o fato; a reação é decisão do mediador. */
 public enum Evento {
     TEMPERATURA_ALTA("temperatura em alerta"),
     TEMPERATURA_CRITICA("temperatura crítica"),

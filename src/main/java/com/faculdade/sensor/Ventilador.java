@@ -1,6 +1,5 @@
 package com.faculdade.sensor;
 
-/** Colega (atuador): executa comandos, não toma decisões. */
 public class Ventilador extends Componente {
 
     private boolean ligado;

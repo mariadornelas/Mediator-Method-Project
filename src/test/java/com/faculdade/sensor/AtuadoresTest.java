@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Os atuadores só executam comandos. Aqui não existe mediador real. */
 class AtuadoresTest {
 
     @Test

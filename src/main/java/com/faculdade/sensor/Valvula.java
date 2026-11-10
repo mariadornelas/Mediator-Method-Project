@@ -1,6 +1,5 @@
 package com.faculdade.sensor;
 
-/** Colega (atuador): válvula de alívio de pressão. */
 public class Valvula extends Componente {
 
     private boolean aberta;

@@ -8,7 +8,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Provas do ponto central do Mediator: os colegas não se conhecem e dependem só da interface. */
 class DesacoplamentoTest {
 
     @Test
@@ -39,7 +38,7 @@ class DesacoplamentoTest {
     @Test
     void sensorDeveFuncionarComQualquerImplementacaoDeMediador() {
         List<String> chamadas = new ArrayList<>();
-        // Um mediador completamente diferente do SalaControle: só registra.
+
         Mediador outro = (origem, evento) -> chamadas.add(origem.getNome() + ":" + evento);
         SensorPressao sensor = new SensorPressao("P-01");
         sensor.definirMediador(outro);
@@ -66,7 +65,7 @@ class DesacoplamentoTest {
 
     @Test
     void novoTipoDeSensorDeveEntrarNaSalaSemAlterarOMediador() {
-        // Sensor de vibração criado só no teste: reaproveita o evento de pressão crítica.
+
         SensorMonitorado vibracao = new SensorMonitorado("V-01", 4, 7) {
             @Override
             protected Evento eventoPara(Nivel nivel) {

@@ -1,6 +1,5 @@
 package com.faculdade.sensor;
 
-/** Cliente de demonstração: monta a sala e conta uma história de incidente passo a passo. */
 public class App {
 
     public static void main(String[] args) {

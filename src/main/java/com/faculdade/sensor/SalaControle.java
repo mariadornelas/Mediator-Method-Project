@@ -2,20 +2,6 @@ package com.faculdade.sensor;
 
 import java.util.Objects;
 
-/**
- * ConcreteMediator: concentra TODAS as regras de interação entre os componentes.
- * É o único lugar que conhece ventilador, válvula, alarme e painel ao mesmo tempo;
- * eles, por sua vez, só conhecem o {@link Mediador}.
- *
- * <p>Regras (aplicadas de forma idempotente depois de cada evento):
- * <ul>
- *   <li>ventilador ligado se a temperatura não está normal OU a pressão está crítica;</li>
- *   <li>válvula aberta se a pressão não está normal;</li>
- *   <li>alarme soa se alguma grandeza está crítica, ou em alerta (a menos que o operador tenha silenciado);</li>
- *   <li>o operador não consegue silenciar o alarme enquanto houver condição crítica;</li>
- *   <li>o silenciamento é desfeito quando tudo normaliza ou quando algo chega a crítico.</li>
- * </ul>
- */
 public class SalaControle implements Mediador {
 
     private final Ventilador ventilador;
@@ -90,7 +76,7 @@ public class SalaControle implements Mediador {
     private void aplicarRegras() {
         Nivel pior = pior();
         if (pior != Nivel.ALERTA) {
-            alarmeSilenciado = false;   // crítico rearma o alarme; normal encerra o silenciamento
+            alarmeSilenciado = false;
         }
 
         boolean alarmeDeve = pior == Nivel.CRITICO || (pior == Nivel.ALERTA && !alarmeSilenciado);

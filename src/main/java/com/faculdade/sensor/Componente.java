@@ -2,11 +2,6 @@ package com.faculdade.sensor;
 
 import java.util.Objects;
 
-/**
- * Colleague (colega): base de todo componente da sala. Só guarda uma referência
- * ao {@link Mediador}, nunca a outro componente. É assim que os colegas
- * ficam desacoplados entre si.
- */
 public abstract class Componente {
 
     private final String nome;

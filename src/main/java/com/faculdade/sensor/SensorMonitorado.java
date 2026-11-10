@@ -1,10 +1,5 @@
 package com.faculdade.sensor;
 
-/**
- * Colega que mede uma grandeza e classifica a leitura em NORMAL, ALERTA ou CRITICO.
- * Só notifica o mediador quando o nível MUDA, e não a cada leitura. O sensor não
- * sabe o que acontecerá em seguida: quem decide é o mediador.
- */
 public abstract class SensorMonitorado extends Componente {
 
     private final double limiteAlerta;
@@ -26,7 +21,7 @@ public abstract class SensorMonitorado extends Componente {
         }
         Nivel novo = classificar(valor);
         if (novo != nivel) {
-            notificarMediador(eventoPara(novo));   // se falhar (sem mediador), o nível não muda
+            notificarMediador(eventoPara(novo));
             nivel = novo;
         }
     }

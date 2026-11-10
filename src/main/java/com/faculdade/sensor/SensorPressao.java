@@ -1,6 +1,5 @@
 package com.faculdade.sensor;
 
-/** Colega: pressão em bar (alerta a partir de 8, crítico a partir de 10). */
 public class SensorPressao extends SensorMonitorado {
 
     public SensorPressao(String nome) {
